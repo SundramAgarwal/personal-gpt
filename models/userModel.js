@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+//hashing of password
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
@@ -36,11 +37,12 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
-
+// matching of password
 userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
+//tokens
 userSchema.methods.getSignedToken = function (res) {
   const accessToken = JWT.sign(
     { id: this._id },
