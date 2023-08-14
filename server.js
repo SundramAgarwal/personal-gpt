@@ -29,7 +29,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server Running on PORT ${PORT} in ${process.env.NODE_ENV} mode`.bgCyan);
+      console.log(`Server Running on PORT ${PORT} in ${process.env.NODE_ENV} mode.`.bgCyan);
     });
   })
   .catch((err) => {
